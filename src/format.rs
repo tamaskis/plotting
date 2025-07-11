@@ -1,6 +1,6 @@
 use derive_builder::Builder;
 
-/// Plot format.
+/// Figure format.
 ///
 /// # Examples
 ///
