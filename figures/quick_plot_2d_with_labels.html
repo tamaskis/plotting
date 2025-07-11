@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js"></script>
+        <script src="https://cdn.plot.ly/plotly-3.0.1.min.js"></script>
+        
+</head>
+
+<body>
+    <div>
+        <div id="plotly-html-element" class="plotly-graph-div" style="height:100%; width:100%;"></div>
+
+        <script type="module">
+            const graph_div = document.getElementById("plotly-html-element");
+            await Plotly.newPlot(graph_div, {"data":[{"type":"scatter","x":[1.0,2.0,3.0],"y":[1.0,4.0,9.0],"line":{}}],"layout":{"title":{"text":"y = x^2"},"xaxis":{"title":{"text":"x"}},"yaxis":{"title":{"text":"y"}}},"config":{}});
+        </script>
+    </div>
+</body>
+
+</html>
