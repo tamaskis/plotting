@@ -11,7 +11,20 @@
 #![warn(missing_docs)]
 
 // Module declarations.
-pub(crate) mod module;
+mod colors;
+mod format;
+mod line_style;
+mod plot;
+mod quick;
+mod trace;
 
 // Re-exports.
-pub use crate::module::example_function;
+pub use crate::colors::{Color, NamedColor};
+pub use crate::format::Format;
+pub use crate::format::FormatBuilder;
+pub use crate::line_style::LineStyle;
+pub use crate::plot::Plot;
+pub use crate::quick::{
+    quick_plot_2d, quick_plot_2d_with_labels, quick_plot_3d, quick_plot_3d_with_labels,
+};
+pub use crate::trace::Trace;
