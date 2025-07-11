@@ -3,4 +3,4 @@ authors = ["Tamas Kis"]
 language = "en"
 multilingual = false
 src = "src"
-title = "todo-crate-name"
+title = "plotting"
