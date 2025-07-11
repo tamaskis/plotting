@@ -14,5 +14,5 @@ exclude = [".gitignore", ".github/", ".vscode/", "Cargo.lock", "book/"]
 rustdoc-args = [ "--html-in-header", "src/docs-header.html" ]
 
 [dependencies]
-
-[dev-dependencies]
+derive_builder = "0.20.2"
+plotly = "0.13.1"
