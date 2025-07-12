@@ -7,7 +7,7 @@
 
 
         <!-- Custom HTML head -->
-
+        <script src="https://cdn.plot.ly/plotly-3.0.1.min.js" charset="utf-8"></script>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
@@ -167,22 +167,25 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="quick-2d-plot-with-labels"><a class="header" href="#quick-2d-plot-with-labels">Quick 2D plot with labels</a></h1>
-<pre><code class="language-rust ignore">use plotting::{Plot, quick_plot_2d_with_labels};
+<pre><code class="language-rust ignore">use plotting::{Figure, quick_plot_2d_with_labels};
 use std::path::Path;
 
 fn main() {
-    // Create the plot.
-    let plot: Plot =
+    // Create the figure.
+    let fig: Figure =
         quick_plot_2d_with_labels([1.0, 2.0, 3.0], [1.0, 4.0, 9.0], "x", "y", "y = x^2");
 
-    // Save the plot so it can be displayed right below this example.
-    plot.save_html(Path::new("book/src/figures/quick_plot_2d_with_labels.html"))
+    // Save the figure so it can be displayed right below this example.
+    fig.save_inline_html(Path::new("book/src/figures/quick_plot_2d_with_labels.html"))
         .unwrap();
 
-    // Alternatively, you can show the plot in a web browser.
-    // plot.show();
+    // Alternatively, you can show the figure in a web browser.
+    // fig.show();
 }</code></pre>
-<iframe src="../figures/quick_plot_2d_with_labels.html" width="100%" height="500" frameborder="0"></iframe>
+<div id="ucqszMy1CsxxuCqCpPdF" class="plotly-graph-div" style="height:100%; width:100%;"></div>
+<script type="text/javascript">
+    Plotly.newPlot("ucqszMy1CsxxuCqCpPdF", {"data":[{"type":"scatter","x":[1.0,2.0,3.0],"y":[1.0,4.0,9.0],"line":{}}],"layout":{"title":{"text":"y = x^2"},"xaxis":{"title":{"text":"x"}},"yaxis":{"title":{"text":"y"}}},"config":{}});
+</script>
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">

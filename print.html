@@ -8,7 +8,7 @@
 
 
         <!-- Custom HTML head -->
-
+        <script src="https://cdn.plot.ly/plotly-3.0.1.min.js" charset="utf-8"></script>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
@@ -171,38 +171,44 @@
 <p>The <code>plotting</code> crate provides simple interfaces for rapidly generating plots.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="2d-plots"><a class="header" href="#2d-plots">2D Plots</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="quick-2d-plot"><a class="header" href="#quick-2d-plot">Quick 2D plot</a></h1>
-<pre><code class="language-rust ignore">use plotting::{Plot, quick_plot_2d};
+<pre><code class="language-rust ignore">use plotting::{Figure, quick_plot_2d};
 use std::path::Path;
 
 fn main() {
-    // Create the plot.
-    let plot: Plot = quick_plot_2d([1.0, 2.0, 3.0], [1.0, 4.0, 9.0]);
+    // Create the figure.
+    let fig: Figure = quick_plot_2d([1.0, 2.0, 3.0], [1.0, 4.0, 9.0]);
 
-    // Save the plot so it can be displayed right below this example.
-    plot.save_html(Path::new("book/src/figures/quick_plot_2d.html"))
+    // Save the figure so it can be displayed right below this example.
+    fig.save_inline_html(Path::new("book/src/figures/quick_plot_2d.html"))
         .unwrap();
 
-    // Alternatively, you can show the plot in a web browser.
-    // plot.show();
+    // Alternatively, you can show the figure in a web browser.
+    // fig.show();
 }</code></pre>
-<iframe src="../figures/quick_plot_2d.html" width="100%" height="500" frameborder="0"></iframe><div style="break-before: page; page-break-before: always;"></div><h1 id="quick-2d-plot-with-labels"><a class="header" href="#quick-2d-plot-with-labels">Quick 2D plot with labels</a></h1>
-<pre><code class="language-rust ignore">use plotting::{Plot, quick_plot_2d_with_labels};
+<div id="JMFwYAp5aTVv0tsPRCx9" class="plotly-graph-div" style="height:100%; width:100%;"></div>
+<script type="text/javascript">
+    Plotly.newPlot("JMFwYAp5aTVv0tsPRCx9", {"data":[{"type":"scatter","x":[1.0,2.0,3.0],"y":[1.0,4.0,9.0],"line":{}}],"layout":{"title":{},"xaxis":{},"yaxis":{}},"config":{}});
+</script><div style="break-before: page; page-break-before: always;"></div><h1 id="quick-2d-plot-with-labels"><a class="header" href="#quick-2d-plot-with-labels">Quick 2D plot with labels</a></h1>
+<pre><code class="language-rust ignore">use plotting::{Figure, quick_plot_2d_with_labels};
 use std::path::Path;
 
 fn main() {
-    // Create the plot.
-    let plot: Plot =
+    // Create the figure.
+    let fig: Figure =
         quick_plot_2d_with_labels([1.0, 2.0, 3.0], [1.0, 4.0, 9.0], "x", "y", "y = x^2");
 
-    // Save the plot so it can be displayed right below this example.
-    plot.save_html(Path::new("book/src/figures/quick_plot_2d_with_labels.html"))
+    // Save the figure so it can be displayed right below this example.
+    fig.save_inline_html(Path::new("book/src/figures/quick_plot_2d_with_labels.html"))
         .unwrap();
 
-    // Alternatively, you can show the plot in a web browser.
-    // plot.show();
+    // Alternatively, you can show the figure in a web browser.
+    // fig.show();
 }</code></pre>
-<iframe src="../figures/quick_plot_2d_with_labels.html" width="100%" height="500" frameborder="0"></iframe><div style="break-before: page; page-break-before: always;"></div><h1 id="general-2d-plotting"><a class="header" href="#general-2d-plotting">General 2D plotting</a></h1>
-<pre><code class="language-rust ignore">use plotting::{Color, Format, FormatBuilder, LineStyle, NamedColor, Plot, Trace};
+<div id="ucqszMy1CsxxuCqCpPdF" class="plotly-graph-div" style="height:100%; width:100%;"></div>
+<script type="text/javascript">
+    Plotly.newPlot("ucqszMy1CsxxuCqCpPdF", {"data":[{"type":"scatter","x":[1.0,2.0,3.0],"y":[1.0,4.0,9.0],"line":{}}],"layout":{"title":{"text":"y = x^2"},"xaxis":{"title":{"text":"x"}},"yaxis":{"title":{"text":"y"}}},"config":{}});
+</script><div style="break-before: page; page-break-before: always;"></div><h1 id="general-2d-plotting"><a class="header" href="#general-2d-plotting">General 2D plotting</a></h1>
+<pre><code class="language-rust ignore">use plotting::{Color, Figure, Format, FormatBuilder, LineStyle, NamedColor, Trace};
 use std::path::Path;
 
 fn main() {
@@ -218,7 +224,7 @@ fn main() {
         .line_width(2.0)
         .line_style(LineStyle::Dot);
 
-    // Plot formatting.
+    // Figure formatting.
     let format: Format = FormatBuilder::default()
         .title("y vs. x")
         .x_label("x")
@@ -228,43 +234,45 @@ fn main() {
         .build()
         .unwrap();
 
-    // Create the plot.
-    let plot = Plot::new(vec![trace_1, trace_2], format);
+    // Create the figure.
+    let fig = Figure::new(vec![trace_1, trace_2], format);
 
-    // Save the plot so it can be displayed right below this example.
-    plot.save_html(Path::new("book/src/figures/general_2d_plot.html"))
+    // Save the figure so it can be displayed right below this example.
+    fig.save_inline_html(Path::new("book/src/figures/general_2d_plot.html"))
         .unwrap();
 
-    // Alternatively, you can show the plot in a web browser.
-    // plot.show();
+    // Alternatively, you can show the figure in a web browser.
+    // fig.show();
 }</code></pre>
-<iframe src="../figures/general_2d_plot.html" width="100%" height="500" frameborder="0"></iframe><div style="break-before: page; page-break-before: always;"></div><h1 id="3d-plots"><a class="header" href="#3d-plots">3D Plots</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="quick-3d-plot"><a class="header" href="#quick-3d-plot">Quick 3D plot</a></h1>
-<pre><code class="language-rust ignore">use plotting::{Plot, quick_plot_3d};
-use std::path::Path;
-
-fn main() {
-    // Create the plot.
-    let plot: Plot = quick_plot_3d([1.0, 2.0, 10.0], [1.0, 4.0, 9.0], [2.0, 5.0, 10.0]);
-
-    // Save the plot so it can be displayed right below this example.
-    plot.save_inline_html(Path::new("book/src/figures/quick_plot_3d.html"))
-        .unwrap();
-
-    // Alternatively, you can show the plot in a web browser.
-    // plot.show();
-}</code></pre>
-<div id="yOH3KDCKXqjjF5IjcfrK" class="plotly-graph-div" style="height:100%; width:100%;"></div>
+<div id="nYFRr1UeD4A65zOUB8nK" class="plotly-graph-div" style="height:100%; width:100%;"></div>
 <script type="text/javascript">
-    Plotly.newPlot("yOH3KDCKXqjjF5IjcfrK", {"data":[{"type":"scatter3d","x":[1.0,2.0,10.0],"y":[1.0,4.0,9.0],"z":[2.0,5.0,10.0],"line":{}}],"layout":{"title":{},"xaxis":{},"yaxis":{}},"config":{}});
-</script>
-<!-- <iframe src="../figures/quick_plot_3d.html" width="100%" height="500" frameborder="0"></iframe> --><div style="break-before: page; page-break-before: always;"></div><h1 id="quick-3d-plot-with-labels"><a class="header" href="#quick-3d-plot-with-labels">Quick 3D plot with labels</a></h1>
-<pre><code class="language-rust ignore">use plotting::{Plot, quick_plot_3d_with_labels};
+    Plotly.newPlot("nYFRr1UeD4A65zOUB8nK", {"data":[{"type":"scatter","x":[1.0,2.0,3.0],"y":[1.0,2.0,3.0],"line":{"width":2.0,"dash":"dash","color":"rgba(255, 0, 0, 1)"}},{"type":"scatter","x":[1.0,2.0,3.0],"y":[1.0,4.0,9.0],"line":{"width":2.0,"dash":"dot","color":"rgba(0, 0, 255, 1)"}}],"layout":{"title":{"text":"y vs. x"},"width":800,"height":600,"xaxis":{"title":{"text":"x"}},"yaxis":{"title":{"text":"y"}}},"config":{}});
+</script><div style="break-before: page; page-break-before: always;"></div><h1 id="3d-plots"><a class="header" href="#3d-plots">3D Plots</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="quick-3d-plot"><a class="header" href="#quick-3d-plot">Quick 3D plot</a></h1>
+<pre><code class="language-rust ignore">use plotting::{Figure, quick_plot_3d};
 use std::path::Path;
 
 fn main() {
-    // Create the plot.
-    let plot: Plot = quick_plot_3d_with_labels(
+    // Create the figure.
+    let fig: Figure = quick_plot_3d([1.0, 2.0, 10.0], [1.0, 4.0, 9.0], [2.0, 5.0, 10.0]);
+
+    // Save the figure so it can be displayed right below this example.
+    fig.save_inline_html(Path::new("book/src/figures/quick_plot_3d.html"))
+        .unwrap();
+
+    // Alternatively, you can show the figure in a web browser.
+    // fig.show();
+}</code></pre>
+<div id="OlyP2XBecNodtiyp2177" class="plotly-graph-div" style="height:100%; width:100%;"></div>
+<script type="text/javascript">
+    Plotly.newPlot("OlyP2XBecNodtiyp2177", {"data":[{"type":"scatter3d","x":[1.0,2.0,10.0],"y":[1.0,4.0,9.0],"z":[2.0,5.0,10.0],"line":{}}],"layout":{"title":{},"xaxis":{},"yaxis":{}},"config":{}});
+</script><div style="break-before: page; page-break-before: always;"></div><h1 id="quick-3d-plot-with-labels"><a class="header" href="#quick-3d-plot-with-labels">Quick 3D plot with labels</a></h1>
+<pre><code class="language-rust ignore">use plotting::{Figure, quick_plot_3d_with_labels};
+use std::path::Path;
+
+fn main() {
+    // Create the figure.
+    let fig: Figure = quick_plot_3d_with_labels(
         [1.0, 2.0, 10.0],
         [1.0, 4.0, 9.0],
         [2.0, 5.0, 10.0],
@@ -274,15 +282,18 @@ fn main() {
         "z vs. x and y",
     );
 
-    // Save the plot so it can be displayed right below this example.
-    plot.save_html(Path::new("book/src/figures/quick_plot_3d_with_labels.html"))
+    // Save the figure so it can be displayed right below this example.
+    fig.save_inline_html(Path::new("book/src/figures/quick_plot_3d_with_labels.html"))
         .unwrap();
 
-    // Alternatively, you can show the plot in a web browser.
-    // plot.show();
+    // Alternatively, you can show the figure in a web browser.
+    // fig.show();
 }</code></pre>
-<iframe src="../figures/quick_plot_3d_with_labels.html" width="100%" height="500" frameborder="0"></iframe><div style="break-before: page; page-break-before: always;"></div><h1 id="general-3d-plotting"><a class="header" href="#general-3d-plotting">General 3D plotting</a></h1>
-<pre><code class="language-rust ignore">use plotting::{Color, Format, FormatBuilder, LineStyle, NamedColor, Plot, Trace};
+<div id="wP0gM1mu4uAOnCdK9YIJ" class="plotly-graph-div" style="height:100%; width:100%;"></div>
+<script type="text/javascript">
+    Plotly.newPlot("wP0gM1mu4uAOnCdK9YIJ", {"data":[{"type":"scatter3d","x":[1.0,2.0,10.0],"y":[1.0,4.0,9.0],"z":[2.0,5.0,10.0],"line":{}}],"layout":{"title":{"text":"z vs. x and y"},"xaxis":{"title":{"text":"x"}},"yaxis":{"title":{"text":"y"}},"zaxis":{"title":{"text":"z"}}},"config":{}});
+</script><div style="break-before: page; page-break-before: always;"></div><h1 id="general-3d-plotting"><a class="header" href="#general-3d-plotting">General 3D plotting</a></h1>
+<pre><code class="language-rust ignore">use plotting::{Color, Figure, Format, FormatBuilder, LineStyle, NamedColor, Trace};
 use std::path::Path;
 
 fn main() {
@@ -298,7 +309,7 @@ fn main() {
         .line_width(2.0)
         .line_style(LineStyle::Dot);
 
-    // Plot formatting.
+    // Figure formatting.
     let format: Format = FormatBuilder::default()
         .title("z vs. x and y")
         .x_label("x")
@@ -309,17 +320,20 @@ fn main() {
         .build()
         .unwrap();
 
-    // Create the plot.
-    let plot = Plot::new(vec![trace_1, trace_2], format);
+    // Create the figure.
+    let fig = Figure::new(vec![trace_1, trace_2], format);
 
-    // Save the plot so it can be displayed right below this example.
-    plot.save_html(Path::new("book/src/figures/general_3d_plot.html"))
+    // Save the figure so it can be displayed right below this example.
+    fig.save_inline_html(Path::new("book/src/figures/general_3d_plot.html"))
         .unwrap();
 
-    // Alternatively, you can show the plot in a web browser.
-    // plot.show();
+    // Alternatively, you can show the figure in a web browser.
+    // fig.show();
 }</code></pre>
-<iframe src="../figures/general_3d_plot.html" width="100%" height="500" frameborder="0"></iframe>
+<div id="SeHCPUg0VqRt2mvIEO6U" class="plotly-graph-div" style="height:100%; width:100%;"></div>
+<script type="text/javascript">
+    Plotly.newPlot("SeHCPUg0VqRt2mvIEO6U", {"data":[{"type":"scatter3d","x":[1.0,2.0,5.0],"y":[1.0,2.0,3.0],"z":[1.0,2.0,4.0],"line":{"width":2.0,"dash":"dash","color":"rgba(255, 0, 0, 1)"}},{"type":"scatter3d","x":[1.0,2.0,5.0],"y":[3.0,2.0,1.0],"z":[1.0,2.0,4.0],"line":{"width":2.0,"dash":"dot","color":"rgba(0, 0, 255, 1)"}}],"layout":{"title":{"text":"z vs. x and y"},"width":800,"height":600,"xaxis":{"title":{"text":"x"}},"yaxis":{"title":{"text":"y"}},"zaxis":{"title":{"text":"z"}}},"config":{}});
+</script>
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
