@@ -1,15 +1,15 @@
 use crate::format::Format;
 use crate::trace::Trace;
 use plotly::{
-    Layout, Scatter, Scatter3D,
+    Layout, Plot, Scatter, Scatter3D,
     common::{Line, Title},
     layout::Axis,
 };
 use std::fs;
 use std::path::Path;
 
-/// Three-dimensional plot.
-pub struct Plot {
+/// Figure.
+pub struct Figure {
     /// Traces to plot on the figure.
     pub(crate) traces: Vec<Trace>,
 
@@ -17,7 +17,7 @@ pub struct Plot {
     pub(crate) format: Format,
 }
 
-impl Plot {
+impl Figure {
     /// Constructor.
     ///
     /// # Arguments
@@ -27,12 +27,12 @@ impl Plot {
     ///
     /// # Returns
     ///
-    /// 3D plot.
+    /// Figure.
     ///
     /// # Example
     ///
     /// ```
-    /// use plotting::{Color, Format, FormatBuilder, LineStyle, NamedColor, Plot, Trace};
+    /// use plotting::{Color, Figure, Format, FormatBuilder, LineStyle, NamedColor, Trace};
     ///
     /// // Define the traces.
     /// let trace_1 = Trace::new_3d([1.0, 2.0, 5.0], [1.0, 2.0, 3.0], [1.0, 2.0, 4.0])
@@ -46,7 +46,7 @@ impl Plot {
     ///     .line_width(2.0)
     ///     .line_style(LineStyle::Dot);
     ///
-    /// // Plot formatting.
+    /// // Figure formatting.
     /// let format: Format = FormatBuilder::default()
     ///     .title("z vs. x and y")
     ///     .x_label("x")
@@ -57,21 +57,21 @@ impl Plot {
     ///     .build()
     ///     .unwrap();
     ///
-    /// // Create the plot.
-    /// let plot = Plot::new(vec![trace_1, trace_2], format);
+    /// // Create the figure.
+    /// let fig = Figure::new(vec![trace_1, trace_2], format);
     /// ```
-    pub fn new(traces: Vec<Trace>, format: Format) -> Plot {
-        Plot { traces, format }
+    pub fn new(traces: Vec<Trace>, format: Format) -> Figure {
+        Figure { traces, format }
     }
 
-    /// Create a plotly `plot` for 3D.
+    /// Create a plotly plot from the figure.
     ///
     /// # Returns
     ///
     /// Plotly plot.
-    pub fn plotly(&self) -> plotly::Plot {
+    pub fn plotly(&self) -> Plot {
         // Initialize the plot.
-        let mut plot = plotly::Plot::new();
+        let mut plot = Plot::new();
 
         // Iterate over traces.
         for trace in self.traces.as_slice() {
@@ -124,7 +124,7 @@ impl Plot {
             .as_ref()
             .map(|z_label| Axis::new().title(z_label));
 
-        // Plot title.
+        // Title.
         let title_plotly: Title = if let Some(title) = &self.format.title {
             Title::with_text(title)
         } else {
@@ -150,24 +150,24 @@ impl Plot {
         plot
     }
 
-    /// Show the plot (opens the plot in a web browser).
+    /// Show the figure (opens the figure in a web browser).
     ///
     /// # Example
     ///
     /// ```
-    /// use plotting::{quick_plot_3d, Plot};
+    /// use plotting::{quick_plot_3d, Figure};
     ///
     /// // Create a quick 3D plot with a single trace.
-    /// let plot: Plot = quick_plot_3d([1.0, 2.0, 10.0], [1.0, 4.0, 9.0], [2.0, 5.0, 10.0]);
+    /// let fig: Figure = quick_plot_3d([1.0, 2.0, 10.0], [1.0, 4.0, 9.0], [2.0, 5.0, 10.0]);
     ///
-    /// // Show the plot (will open in a web browser).
-    /// plot.show();
+    /// // Show the figure (will open in a web browser).
+    /// fig.show();
     /// ```
     pub fn show(&self) {
         self.plotly().show();
     }
 
-    /// Save the plot to a standalone HTML file.
+    /// Save the figure to a standalone HTML file.
     ///
     /// # Arguments
     ///
@@ -175,13 +175,13 @@ impl Plot {
     ///
     /// ```
     /// # fn main() -> std::io::Result<()> {
-    /// use plotting::{quick_plot_3d, Plot};
+    /// use plotting::{quick_plot_3d, Figure};
     ///
     /// // Create a quick 3D plot with a single trace.
-    /// let plot: Plot = quick_plot_3d([1.0, 2.0, 10.0], [1.0, 4.0, 9.0], [2.0, 5.0, 10.0]);
+    /// let fig: Figure = quick_plot_3d([1.0, 2.0, 10.0], [1.0, 4.0, 9.0], [2.0, 5.0, 10.0]);
     ///
-    /// // Save the plot to an HTML file.
-    /// plot.save_html("folder/file.html")?;
+    /// // Save the figure to an HTML file.
+    /// fig.save_html("folder/file.html")?;
     /// # Ok(())
     /// # }
     /// ```
@@ -196,7 +196,7 @@ impl Plot {
         fs::write(path, html_str)
     }
 
-    /// Save the plot to an HTML file meant to be used "in-line" in another HTML file.
+    /// Save the figure to an HTML file meant to be used "in-line" in another HTML file.
     ///
     /// # Arguments
     ///
@@ -204,13 +204,13 @@ impl Plot {
     ///
     /// ```
     /// # fn main() -> std::io::Result<()> {
-    /// use plotting::{quick_plot_3d, Plot};
+    /// use plotting::{quick_plot_3d, Figure};
     ///
     /// // Create a quick 3D plot with a single trace.
-    /// let plot: Plot = quick_plot_3d([1.0, 2.0, 10.0], [1.0, 4.0, 9.0], [2.0, 5.0, 10.0]);
+    /// let fig: Figure = quick_plot_3d([1.0, 2.0, 10.0], [1.0, 4.0, 9.0], [2.0, 5.0, 10.0]);
     ///
-    /// // Save the plot to an HTML file.
-    /// plot.save_inline_html("folder/file.html")?;
+    /// // Save the figure to an HTML file.
+    /// fig.save_inline_html("folder/file.html")?;
     /// # Ok(())
     /// # }
     /// ```

@@ -3,7 +3,7 @@ use crate::line_style::LineStyle;
 
 /// Trace.
 ///
-/// A trace represents a single data series to place on a plot.
+/// A trace represents a single data series to place on a figure.
 ///
 /// # Constructing a trace
 ///
