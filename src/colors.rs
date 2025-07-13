@@ -373,7 +373,10 @@ mod tests {
 
     #[test]
     fn test_blank() {
-        std::env::current_dir().unwrap();
+        assert_eq!(
+            std::env::current_dir().unwrap(),
+            std::path::Path::new("TEST")
+        );
     }
 
     #[test]
