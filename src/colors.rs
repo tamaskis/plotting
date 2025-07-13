@@ -372,6 +372,11 @@ mod tests {
     use super::*;
 
     #[test]
+    fn test_blank() {
+        std::env::current_dir().unwrap();
+    }
+
+    #[test]
     fn test_partial_eq() {
         // Test equality.
         let color_1 = Color::rgb(20, 30, 40);
