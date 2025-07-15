@@ -1,11 +1,11 @@
 use crate::format::Format;
 use crate::trace::Trace;
+use file_io::{get_file_name, save_string_to_file};
 use plotly::{
     Layout, Plot, Scatter, Scatter3D,
     common::{Line, Title},
     layout::Axis,
 };
-use std::fs;
 use std::path::Path;
 
 /// Figure.
@@ -173,6 +173,12 @@ impl Figure {
     ///
     /// * `path` - Path to the HTML file.
     ///
+    /// # Panics
+    ///
+    /// If some error is encountered while creating the file or writing to it.
+    ///
+    /// # Example
+    ///
     /// ```
     /// # fn main() -> std::io::Result<()> {
     /// use plotting::{quick_plot_3d, Figure};
@@ -181,19 +187,14 @@ impl Figure {
     /// let fig: Figure = quick_plot_3d([1.0, 2.0, 10.0], [1.0, 4.0, 9.0], [2.0, 5.0, 10.0]);
     ///
     /// // Save the figure to an HTML file.
-    /// fig.save_html("folder/file.html")?;
+    /// fig.save_html("folder/file.html");
     /// # Ok(())
     /// # }
     /// ```
-    pub fn save_html<P: AsRef<Path>>(&self, path: P) -> std::io::Result<()> {
+    pub fn save_html<P: AsRef<Path>>(&self, path: P) {
         let path = path.as_ref();
         let html_str = self.plotly().to_html();
-        if let Some(parent) = path.parent() {
-            if !parent.exists() {
-                fs::create_dir_all(parent)?;
-            }
-        }
-        fs::write(path, html_str)
+        save_string_to_file(&html_str, path);
     }
 
     /// Save the figure to an HTML file meant to be used "in-line" in another HTML file.
@@ -202,6 +203,12 @@ impl Figure {
     ///
     /// * `path` - Path to the HTML file.
     ///
+    /// # Panics
+    ///
+    /// If some error is encountered while creating the file or writing to it.
+    ///
+    /// # Example
+    ///
     /// ```
     /// # fn main() -> std::io::Result<()> {
     /// use plotting::{quick_plot_3d, Figure};
@@ -210,18 +217,13 @@ impl Figure {
     /// let fig: Figure = quick_plot_3d([1.0, 2.0, 10.0], [1.0, 4.0, 9.0], [2.0, 5.0, 10.0]);
     ///
     /// // Save the figure to an HTML file.
-    /// fig.save_inline_html("folder/file.html")?;
+    /// fig.save_inline_html("folder/file.html");
     /// # Ok(())
     /// # }
     /// ```
-    pub fn save_inline_html<P: AsRef<Path>>(&self, path: P) -> std::io::Result<()> {
+    pub fn save_inline_html<P: AsRef<Path>>(&self, path: P) {
         let path = path.as_ref();
-        let html_str = self.plotly().to_inline_html(None);
-        if let Some(parent) = path.parent() {
-            if !parent.exists() {
-                fs::create_dir_all(parent)?;
-            }
-        }
-        fs::write(path, html_str)
+        let html_str = self.plotly().to_inline_html(Some(&get_file_name(path)));
+        save_string_to_file(&html_str, path);
     }
 }

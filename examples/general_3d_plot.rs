@@ -29,8 +29,7 @@ fn main() {
     let fig = Figure::new(vec![trace_1, trace_2], format);
 
     // Save the figure so it can be displayed right below this example.
-    fig.save_inline_html(Path::new("book/src/figures/general_3d_plot.html"))
-        .unwrap();
+    fig.save_inline_html(Path::new("book/src/figures/general_3d_plot.html"));
 
     // Alternatively, you can show the figure in a web browser.
     // fig.show();

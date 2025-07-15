@@ -14,8 +14,7 @@ fn main() {
     );
 
     // Save the figure so it can be displayed right below this example.
-    fig.save_inline_html(Path::new("book/src/figures/quick_plot_3d_with_labels.html"))
-        .unwrap();
+    fig.save_inline_html(Path::new("book/src/figures/quick_plot_3d_with_labels.html"));
 
     // Alternatively, you can show the figure in a web browser.
     // fig.show();
