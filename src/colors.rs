@@ -6,15 +6,14 @@ use plotly::color::Rgba;
 ///
 /// This enum is a direct re-implementation of the [`plotly::common::color::NamedColor`] enum from
 /// the [`plotly`] crate (Ref. \[1\]). As such, we have included the license of the [`plotly`] crate
-/// in the
-/// [`src/plotly_licenses`](https://github.com/tamaskis/plotting/tree/main/src/plotly_licenses/LICENSE)
+/// in the [`src/plotly_licenses`](https://github.com/tamaskis/plotting/tree/main/src/plotly_licenses/LICENSE)
 /// folder.
 ///
 /// # References
 ///
 /// * \[1\] <https://docs.rs/plotly/latest/plotly/common/color/enum.NamedColor.html>
 /// * \[2\] <https://www.w3schools.com/cssref/css_colors.asp>
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
 #[allow(missing_docs)]
 pub enum NamedColor {
     AliceBlue = 0xF0F8FF,
@@ -291,6 +290,10 @@ impl Color {
     ///
     /// If `color` is outside the valid RGB range (e.g. `color > 0xFFFFFF`), then the default color
     /// is returned.
+    ///
+    /// # References
+    ///
+    /// * \[1\] <https://stackoverflow.com/questions/25004621/how-to-convert-returned-int-value-from-colordrawables-getcolor-to-rgb/25004682>
     pub fn hex_literal(color: u32) -> Color {
         // Return the default color if out of range.
         if color > 0xFFFFFF {
@@ -318,8 +321,8 @@ impl Color {
     ///
     /// # Note
     ///
-    /// If `color` is outside the valid RGB range (e.g. `color > "#FFFFFF"), then the default color
-    /// is returned.
+    /// If `color` is outside the valid RGB range (e.g. `color > "#FFFFFF"), then the default
+    /// color is returned.
     pub fn hex_str(color: &str) -> Color {
         // Remove optional '#' at the beginning
         let color = color.trim_start_matches('#');
@@ -356,12 +359,27 @@ impl Color {
     /// # Returns
     ///
     /// This color as an [`Rgba`] from the [`plotly`] crate.
-    pub(crate) fn to_plotly_rgba(&self) -> Rgba {
+    pub fn to_plotly_rgba(&self) -> Rgba {
         Rgba::new(self.r, self.g, self.b, self.a)
     }
 }
 
 impl Default for Color {
+    /// Default constructor.
+    ///
+    /// # Returns
+    ///
+    /// Default-constructed color (black).
+    ///
+    /// # Example
+    ///
+    /// ```
+    /// use plotting::{Color, NamedColor};
+    ///
+    /// let color = Color::default();
+    ///
+    /// assert_eq!(color, Color::named(NamedColor::Black))
+    /// ```
     fn default() -> Self {
         Color::rgb(0, 0, 0)
     }
@@ -545,7 +563,7 @@ mod tests {
     }
 
     #[test]
-    fn to_plotly_rgba() {
+    fn test_to_plotly_rgba() {
         assert_eq!(
             Color::rgba(20, 30, 40, 0.5).to_plotly_rgba(),
             Rgba::new(20, 30, 40, 0.5)

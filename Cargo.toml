@@ -15,4 +15,5 @@ rustdoc-args = [ "--html-in-header", "src/docs-header.html" ]
 
 [dependencies]
 derive_builder = "0.20.2"
+file-io = "0.1.7"
 plotly = "0.13.1"
