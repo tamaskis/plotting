@@ -36,6 +36,7 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc.js"></script>
@@ -92,10 +93,13 @@
                 sidebar = sidebar || 'visible';
             } else {
                 sidebar = 'hidden';
+                sidebar_toggle.checked = false;
             }
-            sidebar_toggle.checked = sidebar === 'visible';
-            html.classList.remove('sidebar-visible');
-            html.classList.add("sidebar-" + sidebar);
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
@@ -146,7 +150,12 @@
 
                 <div id="search-wrapper" class="hidden">
                     <form id="searchbar-outer" class="searchbar-outer">
-                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
                     </form>
                     <div id="searchresults-outer" class="searchresults-outer hidden">
                         <div id="searchresults-header" class="searchresults-header"></div>
@@ -183,15 +192,14 @@ fn main() {
     );
 
     // Save the figure so it can be displayed right below this example.
-    fig.save_inline_html(Path::new("book/src/figures/quick_plot_3d_with_labels.html"))
-        .unwrap();
+    fig.save_inline_html(Path::new("book/src/figures/quick_plot_3d_with_labels.html"));
 
     // Alternatively, you can show the figure in a web browser.
     // fig.show();
 }</code></pre>
-<div id="wP0gM1mu4uAOnCdK9YIJ" class="plotly-graph-div" style="height:100%; width:100%;"></div>
+<div id="quick_plot_3d_with_labels.html" class="plotly-graph-div" style="height:100%; width:100%;"></div>
 <script type="text/javascript">
-    Plotly.newPlot("wP0gM1mu4uAOnCdK9YIJ", {"data":[{"type":"scatter3d","x":[1.0,2.0,10.0],"y":[1.0,4.0,9.0],"z":[2.0,5.0,10.0],"line":{}}],"layout":{"title":{"text":"z vs. x and y"},"xaxis":{"title":{"text":"x"}},"yaxis":{"title":{"text":"y"}},"zaxis":{"title":{"text":"z"}}},"config":{}});
+    Plotly.newPlot("quick_plot_3d_with_labels.html", {"data":[{"type":"scatter3d","x":[1.0,2.0,10.0],"y":[1.0,4.0,9.0],"z":[2.0,5.0,10.0],"line":{}}],"layout":{"title":{"text":"z vs. x and y"},"xaxis":{"title":{"text":"x"}},"yaxis":{"title":{"text":"y"}},"zaxis":{"title":{"text":"z"}}},"config":{}});
 </script>
                     </main>
 
@@ -239,6 +247,7 @@ fn main() {
         <script src="../book.js"></script>
 
         <!-- Custom JS scripts -->
+
 
 
     </div>
