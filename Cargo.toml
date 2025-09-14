@@ -1,6 +1,6 @@
 [package]
 name = "plotting"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Tamas Kis"]
 edition = "2024"
 description = "Plotting."
@@ -15,5 +15,5 @@ rustdoc-args = [ "--html-in-header", "src/docs-header.html" ]
 
 [dependencies]
 derive_builder = "0.20.2"
-file-io = "0.1.7"
-plotly = "0.13.1"
+file-io = "0.1.11"
+plotly = "0.13.5"
