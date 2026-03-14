@@ -1,6 +1,6 @@
 [package]
 name = "plotting"
-version = "0.1.1"
+version = "0.1.1-alpha.0"
 authors = ["Tamas Kis"]
 edition = "2024"
 description = "Plotting."
